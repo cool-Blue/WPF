@@ -6,18 +6,27 @@
 
     <!--Modified Control Template-->
     <ControlTemplate x:Key="ToggleButtonControlTemplate1" TargetType="{x:Type ButtonBase}">
+        
         <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" 
                     BorderThickness="{TemplateBinding BorderThickness}" 
                     Background="{TemplateBinding Background}" 
                     SnapsToDevicePixels="True">
             <ContentPresenter x:Name="contentPresenter"
                                   ContentTemplate="{TemplateBinding ContentTemplate}"
-                                  Content="{TemplateBinding Content}"
                                   ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False"
                                   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                   Margin="{TemplateBinding Padding}" RecognizesAccessKey="True"
                                   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                
+                <ContentPresenter.Content>
+                    <MultiBinding Converter="{StaticResource ContentChecked}">
+                        <Binding Path="(ToggleButton.Content)" RelativeSource="{RelativeSource TemplatedParent}" />
+                        <Binding Path="(ToggleButton.IsChecked)" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
+                    </MultiBinding>
+                </ContentPresenter.Content>
+                
+            </ContentPresenter>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="Button.IsDefaulted" Value="True">
@@ -51,29 +60,6 @@
                 <Setter Property="TextElement.Foreground" 
                             TargetName="contentPresenter" 
                             Value="{DynamicResource Button.Disabled.Foreground}"/>
-            </Trigger>
-
-            <!--Toggle content based on state-->
-            <Trigger Property="ToggleButton.IsChecked" Value="True">
-                <Setter TargetName="contentPresenter" Property="ContentPresenter.Content">
-                    <Setter.Value>
-                        <MultiBinding Converter="{StaticResource ContentChecked}">
-                            <Binding Path="(ToggleButton.Content)" RelativeSource="{RelativeSource TemplatedParent}" />
-                            <Binding Path="(ToggleButton.IsChecked)" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
-                        </MultiBinding>
-                    </Setter.Value>
-                </Setter>
-            </Trigger>
-            
-            <Trigger Property="ToggleButton.IsChecked" Value="False">
-                <Setter TargetName="contentPresenter" Property="ContentPresenter.Content">
-                    <Setter.Value>
-                        <MultiBinding Converter="{StaticResource ContentChecked}">
-                            <Binding Path="(ToggleButton.Content)" RelativeSource="{RelativeSource TemplatedParent}" />
-                            <Binding Path="(ToggleButton.IsChecked)" RelativeSource="{RelativeSource TemplatedParent}"></Binding>
-                        </MultiBinding>
-                    </Setter.Value>
-                </Setter>
             </Trigger>
 
             <MultiTrigger>
