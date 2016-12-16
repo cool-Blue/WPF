@@ -58,16 +58,17 @@
     <Compile Include="CanExecuteRoutedEventArgs.cs" />
     <Compile Include="ContentControl.cs" />
     <Compile Include="DependencyObject.cs" />
+    <Compile Include="DependencyProperty.cs" />
     <Compile Include="ExecutedRoutedEventArgs.cs" />
     <Compile Include="FrameworkElement.cs" />
     <Compile Include="ListBox.cs" />
     <Compile Include="MediaCommands.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="RoutedCommand.cs">
+    <Compile Include="RoutedCommand.cs">
       <SubType>Code</SubType>
-    </None>
-    <None Include="RoutedUICommand.cs" />
+    </Compile>
+    <Compile Include="RoutedUICommand.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Classes.cd" />
